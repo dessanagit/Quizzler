@@ -25,6 +25,24 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+// List = Array
+// Creating a List and specifying the type -> List<Type> name = [];
+  // List of Icons.
+  List<Icon> scoreKeeper = [];
+
+  // List of questions
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.'
+  ];
+
+  // List of correct answers
+  List<bool> answers = [false, true, true];
+
+  // variable to keep tracking questions.
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,7 +55,8 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                // Showing question following the index inside the list.
+                questions[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -61,7 +80,34 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                // Storing question's answers according with index
+                bool correctAnswer = answers[questionNumber];
+
                 //The user picked true.
+                setState(() {
+                  // Increasing the number by 1 inside the variable questionNumber.
+                  // This is a requirement in order to keep tracking lists and check questions/answers.
+                  questionNumber++;
+
+                  // Checking the answer
+                  if (correctAnswer == true) {
+                    scoreKeeper.add(
+                      Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                    );
+                    print('User got it right!');
+                  } else {
+                    scoreKeeper.add(
+                      Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    );
+                    print('User got it wrong!');
+                  }
+                });
               },
             ),
           ),
@@ -84,7 +130,10 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        //TODO: Add a Row here as your score keeper
+        Row(
+          // All children by nature accept lists.
+          children: scoreKeeper,
+        ),
       ],
     );
   }
