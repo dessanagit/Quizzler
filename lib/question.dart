@@ -1,4 +1,5 @@
 // Creating an class
+// class' name always start with capital letter.
 class Question {
   // properties
   String questionText;

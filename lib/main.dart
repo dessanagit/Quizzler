@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'question.dart';
+import 'quiz_brain.dart';
+
+// Creating an new OBJECT using QuizBrain class/object.
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -32,15 +35,6 @@ class _QuizPageState extends State<QuizPage> {
   // List of Icons.
   List<Icon> scoreKeeper = [];
 
-// List of question and answer using Question Class.
-  List<Question> questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: true),
-  ];
-
   // variable to keep tracking questions.
   int questionNumber = 0;
 
@@ -56,8 +50,8 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                // Showing question following the index inside the list, calling from the cl.ass Question
-                questionBank[questionNumber].questionText,
+                // Showing question following the index inside the list, using quizBrain Object.
+                quizBrain.questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -83,7 +77,8 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 // Storing question's answers according with index, calling from the class Question.
                 bool correctAnswer =
-                    questionBank[questionNumber].questionAnswer;
+                    // getting answer -> Access questionBank inside quizBrain and pull out the questionNumber and then the correct answer.
+                    quizBrain.questionBank[questionNumber].questionAnswer;
 
                 //The user picked true.
                 setState(() {
