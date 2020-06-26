@@ -35,9 +35,6 @@ class _QuizPageState extends State<QuizPage> {
   // List of Icons.
   List<Icon> scoreKeeper = [];
 
-  // variable to keep tracking questions.
-  int questionNumber = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,7 +48,9 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 // Showing question following the index inside the list, using quizBrain Object.
-                quizBrain.questionBank[questionNumber].questionText,
+                // *** NOW: Calling and Using the function created in quiz_brain.dart to pass the input and returning the question.
+                // *** this process is now required because questionBank is now ENCAPSULATED -> _questionBank.
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -78,15 +77,14 @@ class _QuizPageState extends State<QuizPage> {
                 // Storing question's answers according with index, calling from the class Question.
                 bool correctAnswer =
                     // getting answer -> Access questionBank inside quizBrain and pull out the questionNumber and then the correct answer.
-                    quizBrain.questionBank[questionNumber].questionAnswer;
+                    // *** using function because questionBank is encapsulated. SEE MORE IN quiz_brain.dart.
+                    quizBrain.getQuestionAnswer();
 
                 //The user picked true.
                 setState(() {
-                  // Increasing the number by 1 inside the variable questionNumber.
-                  // This is a requirement in order to keep tracking lists and check questions/answers.
-                  questionNumber++;
+                  // To keep main.dart's function, the method was created inside quiz_brain.dart to keep tracking the questions/answers properly.
+                  quizBrain.nextQuestion();
 
-                  // Checking the answer
                   if (correctAnswer == true) {
                     scoreKeeper.add(
                       Icon(
