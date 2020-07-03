@@ -37,6 +37,8 @@ class QuizBrain {
         a: true),
   ];
 
+  // *** EVERYTHING DOWN HERE ARE TAUGHT IN VIDEO LESSONS ***
+
   // *** Method to count number and keep tracking the index in the functions below.
   // this must be called in main.dart.
 
@@ -52,11 +54,13 @@ class QuizBrain {
   // Now questionNumber is a function's input, following the same idea as before.
   String getQuestionText() {
     // effectively returning GETTING QUESTION to use in main.dart
+    // -> .questionText is inside question.dart
     return _questionBank[_questionNumber].questionText;
   }
 
   // Using the same philosophy as above.
   bool getQuestionAnswer() {
+    // .questionAnswer is inside question.dart
     return _questionBank[_questionNumber].questionAnswer;
   }
 }
